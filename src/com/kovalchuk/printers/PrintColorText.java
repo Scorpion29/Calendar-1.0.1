@@ -11,12 +11,17 @@ public class PrintColorText {
     private static String getColorWeekend(){
         return RED;
     }
+
+
     private static String getColorToday(){
         return GREEN;
     }
+
+
     private static String getColorConsole(){
         return RESET;
     }
+
 
     public static void printMonth(String[][] matrix,int numberDayOfMonth,String title){
         if(title!=null) {

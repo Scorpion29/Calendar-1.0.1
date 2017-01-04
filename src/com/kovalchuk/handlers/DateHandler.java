@@ -23,6 +23,8 @@ public class DateHandler {
     public DateHandler(LocalDate localDate){
         this.localDate=localDate;
     }
+
+
     public DateHandler(String date){
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_FORMAT);
         //convert String to LocalDate
@@ -33,16 +35,22 @@ public class DateHandler {
             localDate = LocalDate.parse(getDefaultDate().toString(), formatter);
         }
     }
+
+
     public LocalDate getLocalDate() {
         return localDate;
     }
+
+
     public void setLocalDate(LocalDate localDate) {
         this.localDate = localDate;
     }
 
+
     private static LocalDate getDefaultDate(){
         return LocalDate.now(Clock.system(ZoneId.of(DEFAULT_TIME_ZONE)));
     }
+
 
     public String[][] getCurrentMonthAsMatrix() {
 
@@ -78,6 +86,8 @@ public class DateHandler {
         }
         return curMonth;
     }
+
+
     public boolean isDateValid(String date) {
         try {
             DateFormat df = new SimpleDateFormat(DATE_FORMAT);
