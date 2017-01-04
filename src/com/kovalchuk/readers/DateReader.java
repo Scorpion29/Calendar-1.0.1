@@ -8,7 +8,7 @@ import java.util.Scanner;
 public class DateReader {
     public static String readDateFromConsole(String dateFormat){
         Scanner in = new Scanner(System.in);
-        System.out.println("Введіть дату у форматі : "+ dateFormat);
+        System.out.println("Enter date using the format: "+ dateFormat);
         String tempDate="";
         try {
             tempDate=in.nextLine();

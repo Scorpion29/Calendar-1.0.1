@@ -13,8 +13,8 @@ import java.time.format.DateTimeFormatter;
  * Created by scorpion on 04.01.17.
  */
 public class DateHandler {
-    public final static String DATE_FORMAT = "y-M-d";/*"2016-08-16"*/
-    private final static String DEFAULT_TIME_ZONE="Europe/Kiev";//Часова зона по-замовчуванню
+    public final static String DATE_FORMAT = "y-M-d";/*Example : "2016-08-16"*/
+    private final static String DEFAULT_TIME_ZONE="Europe/Kiev";//Time zone by default
     private LocalDate localDate;
 
     public DateHandler(){
@@ -23,7 +23,6 @@ public class DateHandler {
     public DateHandler(LocalDate localDate){
         this.localDate=localDate;
     }
-
 
     public DateHandler(String date){
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_FORMAT);
@@ -36,37 +35,31 @@ public class DateHandler {
         }
     }
 
-
     public LocalDate getLocalDate() {
         return localDate;
     }
-
 
     public void setLocalDate(LocalDate localDate) {
         this.localDate = localDate;
     }
 
-
     private static LocalDate getDefaultDate(){
         return LocalDate.now(Clock.system(ZoneId.of(DEFAULT_TIME_ZONE)));
     }
 
-
     public String[][] getCurrentMonthAsMatrix() {
 
-        boolean chekLeap= localDate.isLeapYear();//Чи рік високосний
-        int amountOfDays=localDate.getMonth().length(chekLeap);//Кількість днів у місяці
-        int dayOfMonth=localDate.getDayOfMonth();//Номер дня місяця
-        int numberOfFirstDayMonth=localDate.minusDays(dayOfMonth-1).getDayOfWeek().getValue();//Номер дня тижня(першого числа місяця)
-
-        int amountOfRow=(amountOfDays+numberOfFirstDayMonth)/7 + 1 +(((amountOfDays+numberOfFirstDayMonth)%7==0) ? 0:1);//кількість рядків
-        int amountOfColumn=7;//кількість стовпців
+        boolean chekLeap= localDate.isLeapYear();//Is it a leap year?
+        int amountOfDays=localDate.getMonth().length(chekLeap);//The number of days in the month
+        int dayOfMonth=localDate.getDayOfMonth();//Number of the month
+        int numberOfFirstDayMonth=localDate.minusDays(dayOfMonth-1).getDayOfWeek().getValue();//Number of first day of the week
+        int amountOfRow=(amountOfDays+numberOfFirstDayMonth)/7 + 1 +(((amountOfDays+numberOfFirstDayMonth)%7==0) ? 0:1);//number of lines
+        int amountOfColumn=7;//number of columns
         String[][] curMonth=new String[amountOfRow][amountOfColumn];
-        //Перший рядок - Дні тижня
+        //First row - Days of Week
         for(int i=0;i<amountOfColumn;i++){
             curMonth[0][i]= DayOfWeek.of(i+1).toString().substring(0,3);
         }
-        //boolean chekBegin=false;//Перевіряємо чи вже був старт лічильника
         int counterDays=1;
         for(int i=0;i<amountOfRow-1;i++)
         {
@@ -86,7 +79,6 @@ public class DateHandler {
         }
         return curMonth;
     }
-
 
     public boolean isDateValid(String date) {
         try {
